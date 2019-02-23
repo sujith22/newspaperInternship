@@ -1,0 +1,52 @@
+<div class=" login-container">
+    <div class="card bg-light" style="width:400px;        padding:20px;">
+      <div class="text-center">
+        <img class="img-responsive" src="../../../assets/img/JANMABHUMI LOGO.png" alt="Card image cap" width="200">
+      </div>
+      <form >
+        <div class="card-body text-center">
+            <div *ngIf="invalidDetails">
+              <span class="text-danger font-weight-bold">
+                    Invalid Login Credentials. {{error}}
+              </span>
+
+          </div>
+          <mat-form-field style="width:250px">
+                <input matInput type="text" placeholder="Your User Email" required [(ngModel)]="userEmail" name="userEmail" email>
+          </mat-form-field>
+        <div>
+          <mat-form-field style="width:250px">
+              <input matInput type="password" placeholder="Your Password" required minlength="6" [(ngModel)]="password" name="password">
+              <mat-hint align="end">Minimum 6 characters</mat-hint>
+        </mat-form-field>
+      </div>
+      <div>
+          <label for="captcha" class="text-muted"> Captcha </label>
+            &nbsp; &nbsp;
+            <span id="captcha-text">{{captcha}}</span>
+            &nbsp; &nbsp;
+            <button mat-button color="warn" (click)="createCaptcha()">Refresh</button>
+      </div>
+      
+      <div >
+        <mat-form-field style="width:250px">
+          <input matInput type="text" name="captchaInput" placeholder="Enter the above captcha here" name="captchaInput"
+          [(ngModel)]="captchaInput">
+        </mat-form-field>
+      </div>
+      <div *ngIf="captchaNotMatch">
+            <span class="text-danger">
+              Captcha does not match
+            </span>
+      </div>
+        <button mat-raised-button color="primary" (click)="login()">Login</button>
+
+        
+      <div class="pull-right">
+        <button mat-button color="warn" (click)="forgotPassword()">Forgot Password?</button>
+      </div>
+      </div>
+      </form>
+    </div>
+  
+</div>

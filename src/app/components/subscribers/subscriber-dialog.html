@@ -1,0 +1,49 @@
+<form (ngSubmit)="updateSub()">
+        <mat-dialog-content>
+          
+        <div>
+            <div class="text-right">
+                    <button mat-icon-button color="primary" (click)="enableON()" *ngIf="empData.branchAdmin">
+                          <mat-icon>edit</mat-icon>
+                    </button>
+                  </div>
+                  <br>
+                  <div>
+                  <mat-form-field>
+                      <input matInput placeholder="Employee ID" [(ngModel)]="empData.subID" name="subID" required disabled>
+                  </mat-form-field>
+                  &nbsp; &nbsp;
+                  <mat-form-field>
+                      <input matInput placeholder="Subscriber Name" [(ngModel)]="empData.name" name="name"required [disabled]="enabler"> 
+                  </mat-form-field>
+                  &nbsp; &nbsp;
+                  <mat-form-field>
+                      <input matInput placeholder="Subscriber Address" [(ngModel)]="empData.email" name="email"required email [disabled]="enabler"> 
+                  </mat-form-field>
+                </div>
+                <div >
+                    <mat-form-field>
+                        <input matInput placeholder="Phone number" [(ngModel)]="empData.phone" name="phone" required [disabled]="enabler">
+                    </mat-form-field>
+                    &nbsp; &nbsp;
+                    <mat-form-field>
+                        <input matInput placeholder="Aadhar number" [(ngModel)]="empData.aadhar" name="aadhar" required [disabled]="enabler"> 
+                    </mat-form-field>
+                  </div>
+                  
+                    <div>
+                        <mat-form-field>
+                            <textarea matInput placeholder="Address" [(ngModel)]="empData.address" name="address" required [disabled]="enabler"></textarea>
+                          </mat-form-field>
+                          
+                    </div>
+        
+                </div>
+          </mat-dialog-content>
+          <mat-dialog-actions>
+            <button mat-raised-button color="primary" (click)="updateSub()" [disabled]="enabler" *ngIf="empData.branchAdmin">Update</button>
+              &nbsp; &nbsp; &nbsp;
+          
+            <button mat-raised-button color="warn" [mat-dialog-close]="true">Close</button>
+        </mat-dialog-actions>
+        </form>

@@ -1,0 +1,105 @@
+<div class="container" *ngIf="accessDenied" style="height: 75vh;">
+    <br>
+    <br>
+    <h2 class="display-4">Access Denied</h2>
+    <p>
+      You do not have necessary permissions to view the details of this page.
+    </p>
+    <p>
+      Or the URL entered manually is incorrect. Please verify it.
+    </p>
+  </div>
+  
+  
+  
+  <div class="container-fluid" *ngIf="!accessDenied">
+    <br>
+   
+    <div class="text-right">
+    <button mat-raised-button color="accent" (click)="addAgency()"
+      *ngIf="branchAdmin">
+          <mat-icon aria-label="Example icon-button with a heart icon">add_circle</mat-icon> Add Agency
+    </button>
+  </div>
+ 
+  
+  
+    <div *ngIf="viewForm" class="text-center container">
+      <br>
+        <div class="card">
+            <div class="card-body">
+              <form (ngSubmit)="AgencyADD()">
+          <div>
+              <mat-form-field>
+                  <input matInput placeholder="Agency ID" [(ngModel)]="ageID" name="ageID" required disabled>
+              </mat-form-field>
+              &nbsp; &nbsp;
+              <mat-form-field>
+                  <input matInput placeholder="Agency Name" [(ngModel)]="name" name="name"required > 
+              </mat-form-field>
+              &nbsp; &nbsp;
+              <mat-form-field>
+                  <input matInput placeholder="Email Address" [(ngModel)]="email" name="email"required email > 
+              </mat-form-field>
+            </div>
+            <div >
+                <mat-form-field>
+                    <input matInput placeholder="Phone number" [(ngModel)]="phone" name="phone" required >
+                </mat-form-field>
+                &nbsp; &nbsp;
+                <mat-form-field>
+                    <input matInput placeholder="Quantity" [(ngModel)]="quantity" name="quantity" required > 
+                </mat-form-field>
+              </div>
+              <div>
+                  <mat-form-field>
+                      <input matInput placeholder="Drop Point" [(ngModel)]="dropPoint" name="dropPoint" required >
+                  </mat-form-field>
+                  &nbsp; &nbsp;
+                  <mat-form-field>
+                      <input matInput placeholder="No. of Subscribers" [(ngModel)]="NOS" name="NOS" required > 
+                  </mat-form-field>
+                      
+              </div>
+                <div>
+                    <mat-form-field>
+                        <textarea matInput placeholder="Address" [(ngModel)]="address" name="address" required ></textarea>
+                      </mat-form-field>
+                      
+                </div>
+                <div>
+                    <button mat-raised-button color="primary" (click)="AgencyADD()">Add Agency</button>
+                </div>
+      </form>
+    </div>
+  </div>
+  
+    </div>
+  
+    <br>
+  <div  *ngIf="!accessDenied">
+    <table class="table table-striped table-hover table-bordered table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone No.</th>
+            <th scope="col">NOS</th>
+            <th scope="col">Drop Point</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let employee of AgeObs | async" >
+          <tr (click)="moreDetails(employee)">
+            <th scope="row">{{employee.ageID}}</th>
+            <td>{{employee.name}} &nbsp; <span *ngIf='employee.designation=="Branch Admin"?true:false'><i class="material-icons">
+              settings
+              </i></span></td>
+            <td>{{employee.phone}}</td>
+            <td>{{employee.NOS}}</td>
+            <td>{{employee.dropPoint}}</td>
+          </tr>
+        
+        </tbody>
+      </table> 
+    </div>
+  

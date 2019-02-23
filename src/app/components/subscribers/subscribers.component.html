@@ -1,0 +1,92 @@
+<div class="container" *ngIf="accessDenied" style="height: 75vh;">
+    <br>
+    <br>
+    <h2 class="display-4">Access Denied</h2>
+    <p>
+      You do not have necessary permissions to view the details of this page.
+    </p>
+    <p>
+      Or the URL entered manually is incorrect. Please verify it.
+    </p>
+  </div>
+  
+  
+  
+  <div class="container-fluid" *ngIf="!accessDenied">
+    <br>
+   
+<div class="text-right">
+    <button mat-raised-button color="accent" (click)="addSubscriber()"
+      *ngIf="branchAdmin">
+          <mat-icon aria-label="Example icon-button with a heart icon">add_circle</mat-icon> Add subscriber
+    </button>
+  </div>
+  
+  
+    <div *ngIf="viewForm" class="text-center container">
+      <br>
+        <div class="card">
+            <div class="card-body">
+              <form (ngSubmit)="subscriberADD()">
+          <div>
+              <mat-form-field>
+                  <input matInput placeholder="Subscriber ID" [(ngModel)]="subID" name="subID" required disabled>
+              </mat-form-field>
+              &nbsp; &nbsp;
+              <mat-form-field>
+                  <input matInput placeholder="Subscriber Name" [(ngModel)]="name" name="name"required > 
+              </mat-form-field>
+              &nbsp; &nbsp;
+              <mat-form-field>
+                  <input matInput placeholder="Email Address" [(ngModel)]="email" name="email"required email > 
+              </mat-form-field>
+            </div>
+            <div >
+                <mat-form-field>
+                    <input matInput placeholder="Phone number" [(ngModel)]="phone" name="phone" required >
+                </mat-form-field>
+                &nbsp; &nbsp;
+                <mat-form-field>
+                    <input matInput placeholder="Aadhar number" [(ngModel)]="aadhar" name="aadhar" required > 
+                </mat-form-field>
+              </div>
+                <div>
+                    <mat-form-field>
+                        <textarea matInput placeholder="Address" [(ngModel)]="address" name="address" required ></textarea>
+                      </mat-form-field>
+                      
+                </div>
+                <div>
+                    <button mat-raised-button color="primary" (click)="subscriberADD()">Add Subscriber</button>
+                </div>
+      </form>
+    </div>
+  </div>
+  
+    </div>
+  
+    <br>
+  <div  *ngIf="!accessDenied">
+    <table class="table table-striped table-hover table-bordered table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone No.</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let employee of SubObs | async" >
+          <tr (click)="moreDetails(employee)">
+            <th scope="row">{{employee.subID}}</th>
+            <td>{{employee.name}} &nbsp;
+             
+              </td>
+            <td>{{employee.phone}}</td>
+            <td>{{employee.email}}</td>
+            
+          </tr>
+        
+        </tbody>
+      </table> 
+    </div>

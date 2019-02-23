@@ -1,0 +1,27 @@
+<div *ngIf="!isLoggedIn">
+  <h2 class="display-4 text-danger">
+    Loading.... Please Wait...
+  </h2>
+  <p>If data not loaded please logout and login again</p>
+  <button mat-raised-button color="warn" (click)="redirect()">Click here to Login</button>
+</div>
+ 
+<div *ngIf="isLoggedIn">
+<mat-tab-group mat-stretch-tabs class="mat-elevation-z4" style="min-height:70vh;">
+  <mat-tab label="Employees" >
+    <ng-template matTabContent>
+     <app-employees></app-employees>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Subscribers">
+    <ng-template matTabContent>
+      <app-subscribers></app-subscribers>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Agencies">
+    <ng-template matTabContent>
+    <app-agencies></app-agencies>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
+</div>

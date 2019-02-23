@@ -1,0 +1,104 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)">
+    <mat-toolbar color="primary" style="position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%  !important;"><span class="flow-text">{{ loggedInUser }}</span></mat-toolbar>
+    <br>
+    <br>
+    <br>
+    <br>
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="mx-auto">
+        <i class="material-icons" >filter_list</i>
+        <span class="text-muted" style="font-size: 18px;">
+            {{ MenuItem}}
+          </span>
+      </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="menuClick($event)">Offices</button>
+          <button mat-menu-item (click)="menuClick($event)">Agencies</button>
+          <button mat-menu-item (click)="menuClick($event)">Employees</button>
+          <button mat-menu-item (click)="menuClick($event)">Reports</button>
+      </mat-menu> 
+        <div style="margin: auto">
+            <mat-nav-list role="list" class="basic-menu-list">
+                <mat-list-item role="listitem"class="menu-header" >
+        <mat-form-field>
+            <input matInput type="text" placeholder="Search">
+            
+        </mat-form-field>
+        </mat-list-item>
+        </mat-nav-list>
+      </div>
+    <mat-expansion-panel *ngIf="dis">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="menu-header">
+          Offices
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      
+        <mat-list-item role="listitem" class="sub-menu" *ngIf="isLoggedIn">
+            <a mat-list-item class="text-muted" *ngFor="let office of offices" (click)="officeClick(office)" style="text-transform: capitalize;"> {{ office }} </a>
+        </mat-list-item>
+    </mat-expansion-panel>
+
+ 
+  <mat-divider ></mat-divider>
+  <mat-divider ></mat-divider>
+  <mat-divider ></mat-divider>
+<!--   
+  <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title class="menu-header">
+          Reports
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-divider ></mat-divider>
+        <mat-list-item role="listitem" class="sub-menu">
+            <a mat-list-item class="text-muted" *ngFor="let report of reports"> {{ report }} </a>
+        </mat-list-item>
+    </mat-expansion-panel> -->
+    
+      
+    <!-- Reports ends -->
+    <!-- Requests -->
+    <!-- <mat-nav-list role="list" class="basic-menu-list" *ngIf="superadmin">
+        <mat-list-item role="listitem"class="menu-header" >
+            <a matLine  href="#"class="text-success">Requests</a></mat-list-item>
+        
+    </mat-nav-list> -->
+    <!-- <mat-divider ></mat-divider>
+    <mat-divider ></mat-divider>
+    <mat-divider ></mat-divider> -->
+ <!-- Logout -->
+
+  
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span class="font-weight-bold" style="font-size: 25px;">DashBoard</span>
+      <div class="ml-auto">
+          <button  mat-flat-button color="warn" (click)=logout() *ngIf="isLoggedIn">Logout</button>
+      </div>
+      
+    </mat-toolbar>
+    <div class="container-fluid">
+        <app-dashboard></app-dashboard>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

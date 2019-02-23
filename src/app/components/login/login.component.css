@@ -1,0 +1,13 @@
+.login-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+#captcha-text{
+    text-decoration: line-through;
+}
+.forgott{
+    text-align: left !important;
+}
